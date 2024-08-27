@@ -15,7 +15,10 @@
 workspace(name = "vr180")
 
 load("@bazel_tools//tools/build_defs/repo:maven_rules.bzl", "maven_aar")
+load("@bazel_tools//tools/build_defs/repo:maven_rules.bzl", "maven_jar")
+
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 
 android_sdk_repository(
     name = "androidsdk",
@@ -72,18 +75,17 @@ http_archive(
 
 http_archive(
     name = "robolectric",
-    sha256 = "dff7a1f8e7bd8dc737f20b6bbfaf78d8b5851debe6a074757f75041029f0c43b",
-    strip_prefix = "robolectric-bazel-4.0.1",
-    urls = ["https://github.com/robolectric/robolectric-bazel/archive/4.0.1.tar.gz"],
+    sha256 = "f7b8e08f246f29f26fddd97b7ab5dfa01aaa6170ccc24b9b6a21931bde01ad6f",
+    strip_prefix = "robolectric-bazel-4.12.2",
+    urls = ["https://github.com/robolectric/robolectric-bazel/releases/download/4.12.2/robolectric-bazel-4.12.2.tar.gz"],
 )
-
 load("@robolectric//bazel:robolectric.bzl", "robolectric_repositories")
 
 robolectric_repositories()
 
-new_http_archive(
+http_archive(
     name = "eigen",
-    build_file = "cpp/third_party/BUILD.eigen",
+    build_file = "//:cpp/third_party/BUILD.eigen",
     sha256 = "d956415d784fa4e42b6a2a45c32556d6aec9d0a3d8ef48baee2522ab762556a9",
     strip_prefix = "eigen-eigen-fd6845384b86",
     urls = [
@@ -92,34 +94,35 @@ new_http_archive(
     ],
 )
 
-new_http_archive(
+http_archive(
     name = "libjpeg_turbo",
-    build_file = "cpp/third_party/BUILD.libjpeg_turbo",
+    build_file = "//:cpp/third_party/BUILD.libjpeg_turbo",
+    # sha256 = "0a3195506b92f0c29e4fa5f3f5387f531c390a04e74615895443176883b040b8",
     sha256 = "0a3195506b92f0c29e4fa5f3f5387f531c390a04e74615895443176883b040b8",
     strip_prefix = "libjpeg-turbo-43ce78e0321da44fe359f40a847fe79d2de06d4c",
     urls = ["https://github.com/libjpeg-turbo/libjpeg-turbo/archive/43ce78e0321da44fe359f40a847fe79d2de06d4c.tar.gz"],
 )
 
-new_http_archive(
+http_archive(
     name = "com_google_glog",
-    build_file = "cpp/third_party/BUILD.glog",
+    build_file = "//:cpp/third_party/BUILD.glog",
     sha256 = "19b8b73719c1a188899f728787dcf4899e72a259bef66a9d66e116ccedfaee02",
     strip_prefix = "glog-781096619d3dd368cfebd33889e417a168493ce7",
     urls = ["https://github.com/google/glog/archive/781096619d3dd368cfebd33889e417a168493ce7.zip"],
 )
 
-new_http_archive(
+http_archive(
     name = "com_google_xmpmeta",
-    build_file = "cpp/third_party/BUILD.xmpmeta",
-    sha256 = "c958dd1d326bdfbd3da726a86e3fe9733ba8eb40ef303275063a1e6c80aaf00a",
+    build_file = "//:cpp/third_party/BUILD.xmpmeta",
+    # sha256 = "c958dd1d326bdfbd3da726a86e3fe9733ba8eb40ef303275063a1e6c80aaf00a",
     strip_prefix = "xmpmeta-73671eccaef4879bb89fa98ee3e50514760f6c97",
     urls = ["https://github.com/google/xmpmeta/archive/73671eccaef4879bb89fa98ee3e50514760f6c97.zip"],
 )
 
 # libxml is a dependency for com_google_xmpmeta
-new_http_archive(
+http_archive(
     name = "libxml",
-    build_file = "cpp/third_party/BUILD.libxml",
+    build_file = "//:cpp/third_party/BUILD.libxml",
     sha256 = "f63c5e7d30362ed28b38bfa1ac6313f9a80230720b7fb6c80575eeab3ff5900c",
     strip_prefix = "libxml2-2.9.7",
     urls = [
@@ -142,9 +145,7 @@ maven_aar(
 
 maven_aar(
     name = "webrtc",
-    artifact = "org.webrtc:google-webrtc:1.0.25003",
-    settings = "//:jcenter-settings.xml",
-    sha1 = "b108d8b34e234bebfd46e0d3165593c502615b52",
+    artifact = "com.dafruits:webrtc:123.0.0",
 )
 
 maven_aar(

@@ -105,7 +105,7 @@ android_binary(
     srcs = [
         "CameraAppGlideModule.java",
     ],
-    aapt_version = "aapt",
+    # aapt_version = "aapt",
     manifest = "AndroidManifest.xml",
     multidex = "native",
     plugins = [":glide_plugin"],

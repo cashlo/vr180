@@ -53,7 +53,7 @@ correctness of the format implementation.
 The reference camera app uses the [Bazel](https://bazel.build/) build system. The following tools need to be installed:
 
 * Setup [Android SDK](https://developer.android.com/studio/) and `export ANDROID_HOME=$HOME/Android/Sdk/`
-* Setup [Android NDK](https://developer.android.com/ndk/downloads/) and `export ANDROID_NDK_HOME=$HOME/Android/Sdk/ndk-bundle`
+* Setup [Android NDK](https://developer.android.com/ndk/downloads/) and `export ANDROID_NDK_HOME=$HOME/Android/Sdk/ndk/18.1.5063045`
 * Setup [Maven](https://maven.apache.org/install.html)
 * Setup [Bazel](https://docs.bazel.build/versions/master/install-ubuntu.html)
 

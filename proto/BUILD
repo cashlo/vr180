@@ -41,24 +41,24 @@ proto_library(
 
 java_lite_proto_library(
     name = "camera_api_java_proto_lite",
-    strict_deps = 0,
+    # strict_deps = 0,
     deps = [":camera_api_proto"],
 )
 
 java_lite_proto_library(
     name = "camera_pairing_java_proto_lite",
-    strict_deps = 0,
+    # strict_deps = 0,
     deps = [":camera_pairing_proto"],
 )
 
 java_lite_proto_library(
     name = "camera_internal_api_java_proto_lite",
-    strict_deps = 0,
+    # strict_deps = 0,
     deps = [":camera_internal_api_proto"],
 )
 
 java_lite_proto_library(
     name = "mesh_java_proto_lite",
-    strict_deps = 0,
+    # strict_deps = 0,
     deps = [":mesh_protolib"],
 )
