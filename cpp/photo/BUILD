@@ -17,16 +17,11 @@ package(default_visibility = ["//visibility:public"])
 licenses(["notice"])
 
 cc_library(
-    name = "photo_writer",
-    srcs = [
-        "photo_writer.cc",
-    ],
+    name = "jpeg_encoder",
+    srcs = ["jpeg_encoder.cc"],
+    hdrs = ["jpeg_encoder.h"],
     deps = [
-        "//cpp/common:io",
-        "//cpp/jni",
-        "//cpp/photo:jpeg_encoder",
-        "//cpp/video:stereo_mode",
-        "@com_google_xmpmeta//:xmpmeta",
-        "@eigen//:eigen",
+        "@com_google_glog//:glog",
+        "@libjpeg_turbo//:jpeg",
     ],
 )

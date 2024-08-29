@@ -116,7 +116,7 @@ libjpegturbo_copts_neon = [
     "-D__ARM_NEON__",
     "-march=armv7-a",
     "-fprefetch-loop-arrays",
-   # "-mfloat-abi=softfp",
+    "-mfloat-abi=softfp",
 ]
 
 libjpegturbo_copts = [
@@ -253,7 +253,6 @@ cc_library(
     ] + SIMD_SRCS,
     copts = libjpegturbo_copts,
     includes = ["simd/arm"],
-    # toolchains = ["@androidndk//:default_crosstool"],
 )
 
 cc_library(
