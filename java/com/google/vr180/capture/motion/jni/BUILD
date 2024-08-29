@@ -23,7 +23,7 @@ cc_library(
         "sensor_fusion.cc",
     ],
     deps = [
-        "//cpp/jni:jni",
+        "//cpp/jni",
         "//cpp/sensor_fusion:online_sensor_fusion",
         "@com_google_absl//absl/memory",
         "@eigen//:eigen",
