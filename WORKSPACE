@@ -97,7 +97,6 @@ http_archive(
 http_archive(
     name = "libjpeg_turbo",
     build_file = "//:cpp/third_party/BUILD.libjpeg_turbo",
-    # sha256 = "0a3195506b92f0c29e4fa5f3f5387f531c390a04e74615895443176883b040b8",
     sha256 = "0a3195506b92f0c29e4fa5f3f5387f531c390a04e74615895443176883b040b8",
     strip_prefix = "libjpeg-turbo-43ce78e0321da44fe359f40a847fe79d2de06d4c",
     urls = ["https://github.com/libjpeg-turbo/libjpeg-turbo/archive/43ce78e0321da44fe359f40a847fe79d2de06d4c.tar.gz"],
@@ -114,7 +113,7 @@ http_archive(
 http_archive(
     name = "com_google_xmpmeta",
     build_file = "//:cpp/third_party/BUILD.xmpmeta",
-    # sha256 = "c958dd1d326bdfbd3da726a86e3fe9733ba8eb40ef303275063a1e6c80aaf00a",
+    sha256 = "c958dd1d326bdfbd3da726a86e3fe9733ba8eb40ef303275063a1e6c80aaf00a",
     strip_prefix = "xmpmeta-73671eccaef4879bb89fa98ee3e50514760f6c97",
     urls = ["https://github.com/google/xmpmeta/archive/73671eccaef4879bb89fa98ee3e50514760f6c97.zip"],
 )
