@@ -24,7 +24,7 @@
 #include "cpp/common/io.h"
 #include "cpp/jni/jni_utils.h"
 #include "cpp/jni/macros.h"
-// #include "cpp/photo/jpeg_encoder.h"
+#include "cpp/photo/jpeg_encoder.h"
 #include "cpp/video/stereo_mode.h"
 #include "xmpmeta/gimage.h"
 #include "xmpmeta/gpano.h"

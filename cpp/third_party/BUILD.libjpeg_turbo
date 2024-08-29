@@ -114,7 +114,7 @@ EOF
 
 libjpegturbo_copts_neon = [
     "-D__ARM_NEON__",
-    "-march=armv7-a",
+    "-march=armv8-a",
     "-fprefetch-loop-arrays",
     "-mfloat-abi=softfp",
 ]
@@ -228,7 +228,7 @@ cc_library(
     includes = ["simd"],
     linkstatic = 1,
     # Note: This dep can be replaced for different os/cpu targets.
-    deps = [":libjpegturbo_simd_armv7a"],
+    deps = [":libjpegturbo_simd_armv8a"],
 )
 
 SIMD_SRCS = [

@@ -95,6 +95,15 @@ http_archive(
 )
 
 http_archive(
+    name = "libjpeg_turbo",
+    build_file = "//:cpp/third_party/BUILD.libjpeg_turbo",
+    # sha256 = "0a3195506b92f0c29e4fa5f3f5387f531c390a04e74615895443176883b040b8",
+    sha256 = "0a3195506b92f0c29e4fa5f3f5387f531c390a04e74615895443176883b040b8",
+    strip_prefix = "libjpeg-turbo-43ce78e0321da44fe359f40a847fe79d2de06d4c",
+    urls = ["https://github.com/libjpeg-turbo/libjpeg-turbo/archive/43ce78e0321da44fe359f40a847fe79d2de06d4c.tar.gz"],
+)
+
+http_archive(
     name = "com_google_glog",
     build_file = "//:cpp/third_party/BUILD.glog",
     sha256 = "19b8b73719c1a188899f728787dcf4899e72a259bef66a9d66e116ccedfaee02",
