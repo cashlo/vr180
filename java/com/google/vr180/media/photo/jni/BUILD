@@ -24,7 +24,6 @@ cc_library(
     deps = [
         "//cpp/common:io",
         "//cpp/jni",
-        "//cpp/photo:jpeg_encoder",
         "//cpp/video:stereo_mode",
         "@com_google_xmpmeta//:xmpmeta",
         "@eigen//:eigen",
