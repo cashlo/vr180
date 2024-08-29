@@ -17,7 +17,7 @@
 #ifndef VR180_CPP_JNI_JNI_UTILS_H_
 #define VR180_CPP_JNI_JNI_UTILS_H_
 
-#include "cpp/jni/jni.h"
+#include <jni.h>
 #include <string>
 #include <vector>
 
