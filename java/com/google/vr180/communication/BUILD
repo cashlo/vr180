@@ -24,6 +24,7 @@ DEPS = [
     "@httpclient//jar",
     "@httpcore//jar",
     "@jsr305//jar",
+    "@protobuf//jar",
 ]
 
 android_library(

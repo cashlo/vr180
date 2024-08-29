@@ -22,6 +22,8 @@ cc_library(
     srcs = ["jni_utils.cc"],
     hdrs = [
         "jni_utils.h",
+        "jni.h",
+        "jni_md.h",
         "macros.h",
     ],
 )

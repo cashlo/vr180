@@ -24,7 +24,7 @@
     For actual cameras, you may target a higher API level when the camera app runs as a system app.
   -->
   <uses-sdk
-      android:minSdkVersion="19"
+      android:minSdkVersion="21"
       android:targetSdkVersion="22"/>
 
   <uses-permission android:name="android.permission.REBOOT"/>

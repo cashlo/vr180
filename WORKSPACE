@@ -44,9 +44,9 @@ gmaven_rules()
 
 http_archive(
     name = "com_google_absl",
-    sha256 = "84b4277a9b56f9a192952beca535313497826c6ff2e38b2cac7351a3ed2ae780",
-    strip_prefix = "abseil-cpp-c476da141ca9cffc2137baf85872f0cae9ffa9ad",
-    urls = ["https://github.com/abseil/abseil-cpp/archive/c476da141ca9cffc2137baf85872f0cae9ffa9ad.zip"],
+    # sha256 = "84b4277a9b56f9a192952beca535313497826c6ff2e38b2cac7351a3ed2ae780",
+    strip_prefix = "abseil-cpp-20240722.0",
+    urls = ["https://github.com/abseil/abseil-cpp/releases/download/20240722.0/abseil-cpp-20240722.0.tar.gz"],
 )
 
 http_archive(
@@ -92,15 +92,6 @@ http_archive(
         "https://mirror.bazel.build/bitbucket.org/eigen/eigen/get/fd6845384b86.tar.gz",
         "https://bitbucket.org/eigen/eigen/get/fd6845384b86.tar.gz",
     ],
-)
-
-http_archive(
-    name = "libjpeg_turbo",
-    build_file = "//:cpp/third_party/BUILD.libjpeg_turbo",
-    # sha256 = "0a3195506b92f0c29e4fa5f3f5387f531c390a04e74615895443176883b040b8",
-    sha256 = "0a3195506b92f0c29e4fa5f3f5387f531c390a04e74615895443176883b040b8",
-    strip_prefix = "libjpeg-turbo-43ce78e0321da44fe359f40a847fe79d2de06d4c",
-    urls = ["https://github.com/libjpeg-turbo/libjpeg-turbo/archive/43ce78e0321da44fe359f40a847fe79d2de06d4c.tar.gz"],
 )
 
 http_archive(
@@ -152,6 +143,12 @@ maven_aar(
     name = "rxandroid2",
     artifact = "io.reactivex.rxjava2:rxandroid:2.1.0",
     sha1 = "1d05d7d192aa5f6989d352020bde5b8e2dfc45b2",
+)
+
+maven_jar(
+    name = "protobuf",
+    artifact = "com.google.protobuf:protobuf-java:3.5.1",
+    sha1 = "8c3492f7662fa1cbf8ca76a0f5eb1146f7725acd",
 )
 
 maven_jar(

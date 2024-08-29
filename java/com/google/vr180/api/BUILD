@@ -36,6 +36,7 @@ DEPS = [
     "@okhttp//jar",
     "@rxjava2//jar",
     "@webrtc//aar",
+    "@protobuf//jar",
 ]
 
 android_library(

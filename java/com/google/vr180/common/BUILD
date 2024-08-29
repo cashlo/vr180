@@ -26,5 +26,6 @@ android_library(
         "@guava//jar",
         "@jsr305//jar",
         "@webrtc//aar",
+        "@protobuf//jar",
     ],
 )

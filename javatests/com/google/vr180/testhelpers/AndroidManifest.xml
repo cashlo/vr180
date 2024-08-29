@@ -18,6 +18,6 @@
     package="com.google.vr180.testhelpers">
 
   <uses-sdk
-      android:minSdkVersion="19"
+      android:minSdkVersion="21"
       android:targetSdkVersion="28"/>
 </manifest>
