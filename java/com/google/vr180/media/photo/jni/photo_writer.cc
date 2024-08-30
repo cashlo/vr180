@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <jni.h>
+#include "cpp/jni/jni.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <array>
@@ -126,10 +126,7 @@ JNIEXPORT bool JNICALL JNI_METHOD(nativeWriteVRPhotoToFile)(
   bool success = false;
   if (fov_x == 0 || fov_y == 0) {
     // If we don't have a valid crop just save the raw image.
-    success =
-        vr180::EncodeRGBAJpeg(rgba_data, 0, 0, stereo_width, stereo_height,
-                              stride, kJpegQuality, &left) &&
-        vr180::SetFileContents(output_path, left);
+    success = vr180::SetFileContents(output_path, left);
   } else {
     // Get the photo metadata.
     const bool is_left_right =
@@ -147,17 +144,7 @@ JNIEXPORT bool JNICALL JNI_METHOD(nativeWriteVRPhotoToFile)(
     const xmpmeta::PanoMetaData metadata = GetPanoMetaData(
         width, height, fov_x, fov_y, GetEulerAngles(orientation));
 
-    success =
-        // Encode the left eye.
-        vr180::EncodeRGBAJpeg(rgba_data, 0, 0, width, height, stride,
-                              kJpegQuality, &left) &&
-        // Encode the right eye iff the photo is a stereo photo.
-        ((!is_left_right && !is_top_bottom) ||
-         vr180::EncodeRGBAJpeg(rgba_data, stereo_width - width,
-                               stereo_height - height, width, height, stride,
-                               kJpegQuality, &right)) &&
-        // Write the image(s) and metadata to file.
-        WriteVRPhoto(left, right, metadata, output_path);
+    success = WriteVRPhoto(left, right, metadata, output_path);
   }
   env->ReleaseByteArrayElements(rgba_buffer,
                                 reinterpret_cast<jbyte*>(rgba_data), JNI_ABORT);
