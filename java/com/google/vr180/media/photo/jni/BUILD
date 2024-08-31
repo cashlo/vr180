@@ -29,4 +29,5 @@ cc_library(
         "@com_google_xmpmeta//:xmpmeta",
         "@eigen//:eigen",
     ],
+    alwayslink = 1,
 )

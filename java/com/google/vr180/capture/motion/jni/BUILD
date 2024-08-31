@@ -28,4 +28,5 @@ cc_library(
         "@com_google_absl//absl/memory",
         "@eigen//:eigen",
     ],
+    alwayslink = 1,
 )

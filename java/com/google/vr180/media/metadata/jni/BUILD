@@ -32,4 +32,5 @@ cc_library(
         "//cpp/video/atoms:atom_moov",
         "@com_google_glog//:glog",
     ],
+    alwayslink = 1,
 )
