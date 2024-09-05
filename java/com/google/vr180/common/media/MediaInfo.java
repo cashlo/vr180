@@ -22,6 +22,7 @@ import android.media.MediaMetadataRetriever;
 import android.provider.MediaStore;
 import com.google.vr180.common.logging.Log;
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -119,7 +120,11 @@ public class MediaInfo {
     } catch (Exception e) {
       Log.e(TAG, "Unable to parse video metadata from: " + file.getAbsolutePath(), e);
     } finally {
-      retriever.release();
+        try {
+            retriever.release();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
   }
 

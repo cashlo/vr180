@@ -16,6 +16,8 @@ package com.google.vr180.app;
 
 import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
@@ -69,6 +71,7 @@ public class MainService extends Service implements HardwareListener {
   private static final int AUTO_POWER_OFF_REQUEST_CODE = 1;
 
   private static final long AUTO_SHUTDOWN_TIME_MS = 30 * 60 * 1000; // 30 minutes
+  private static final String CHANNEL_ID = "1";
 
   private final Handler mainHandler = new Handler(Looper.getMainLooper());
   private final CompositeDisposable subscriptions = new CompositeDisposable();
@@ -144,8 +147,16 @@ public class MainService extends Service implements HardwareListener {
     filter.addAction(Intent.ACTION_SCREEN_OFF);
     registerReceiver(sleepModeReceiver, filter);
 
+    NotificationChannel channel = new NotificationChannel(
+            CHANNEL_ID,
+            "Foreground Service Channel",
+            NotificationManager.IMPORTANCE_DEFAULT
+    );
+    NotificationManager manager = getSystemService(NotificationManager.class);
+    manager.createNotificationChannel(channel);
+
     // Keep the service running as long as possible
-    startForeground(1, new Notification.Builder(this).setContentTitle(TAG).build());
+    startForeground(1, new Notification.Builder(this, CHANNEL_ID).setContentTitle(TAG).build());
 
     notifyServiceCreation();
 
@@ -459,6 +470,6 @@ public class MainService extends Service implements HardwareListener {
     Intent intent = new Intent(ACTION_AUTO_POWER_OFF, null, this, MainService.class);
     return
         PendingIntent.getService(
-            this, AUTO_POWER_OFF_REQUEST_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            this, AUTO_POWER_OFF_REQUEST_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
   }
 }

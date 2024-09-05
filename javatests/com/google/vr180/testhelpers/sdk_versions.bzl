@@ -15,6 +15,6 @@
 """ This file defines a set of Android SDK versions that can be used in android_local_test rules that do not use the actual manifest. """
 
 MANIFEST_VALUES = {
-    "minSdkVersion": "19",
+    "minSdkVersion": "23",
     "targetSdkVersion": "28",
 }
