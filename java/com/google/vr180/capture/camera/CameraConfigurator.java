@@ -18,17 +18,26 @@ import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
 
+import com.google.vr180.common.logging.Log;
+
+import java.util.Arrays;
+
 /** Device-specific util functions for configuring the CameraPreview */
-public class CameraConfigurator {
+public class   CameraConfigurator {
 
   // Set necessary OEM-specific system property for preview.
-  public void preparePreview(PreviewConfig config) {}
+  public void preparePreview(PreviewConfig config) {
+  }
 
   // OEM-speicfic keys for CaptureRequest.Builder.
-  public void setDeviceSpecificKeys(CaptureRequest.Builder builder) {}
+  public void setDeviceSpecificKeys(CaptureRequest.Builder builder) {
+    builder.set(CaptureRequest.CONTROL_EXTENDED_SCENE_MODE, 1);
+  }
 
   // Return the OEM-specific camera ID. Default to 0.
   public String getPreviewCameraId(CameraManager cameraManager) throws CameraAccessException {
+    Log.d("WHATWHAT", "mConcurrentCameraIdCombinations=" + cameraManager.getConcurrentCameraIds());
+
     return cameraManager.getCameraIdList()[0];
   }
 }

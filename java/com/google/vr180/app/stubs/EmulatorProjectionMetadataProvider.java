@@ -86,16 +86,14 @@ public class EmulatorProjectionMetadataProvider implements ProjectionMetadataPro
      */
     boolean isEquirect = getProjectionType(mode) == ProjectionType.EQUIRECT;
     StereoReprojectionConfig stereoConfig = null;
-    if (isEquirect) {
       MeshProto.StereoMeshConfig mesh = loadStereoMeshConfigFromAsset(MESH_ASSET);
       SizeF outputFov = ProjectionMetadataProviderUtils.getFov(mode);
       if (mesh != null && outputFov != null) {
-        stereoConfig = new StereoReprojectionConfig(mesh.getLeftEye(), outputFov);
+        stereoConfig = new StereoReprojectionConfig(mesh, StereoMode.LEFT_RIGHT, outputFov);
       }
-    }
     return new ProjectionMetadata(
-        StereoMode.MONO,
-        loadMP4BoxFromAsset(isEquirect ? SV3D_EQUIRECT_ASSET : SV3D_ASSET),
+            StereoMode.LEFT_RIGHT,
+        loadMP4BoxFromAsset(SV3D_ASSET),
         stereoConfig);
   }
 

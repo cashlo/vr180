@@ -22,6 +22,7 @@ import com.google.vr180.CameraApi.PhotoMode;
 import com.google.vr180.CameraApi.ProjectionType;
 import com.google.vr180.CameraApi.VideoMode;
 import com.google.vr180.CameraApi.ViewfinderMode;
+import com.google.vr180.CameraApi.ViewfinderMode.StereoMode;
 import com.google.vr180.CameraApi.WhiteBalanceMode;
 import com.google.vr180.api.camerainterfaces.CapabilitiesProvider;
 
@@ -30,8 +31,8 @@ public class EmulatorCapabilitiesProvider implements CapabilitiesProvider {
 
   // The exposure adjustment step.
   public static final float AE_ADJUSTMENT_STEP = 1.0f / 6;
-  public static final float FOV_X = 67;
-  public static final float FOV_Y = 53;
+  public static final float FOV_X = 84; //  67;
+  public static final float FOV_Y = 70; //  53;
 
   @Override
   public CameraCapabilities getCapabilities() {
@@ -44,9 +45,9 @@ public class EmulatorCapabilitiesProvider implements CapabilitiesProvider {
         .setUpdateCapability(
             CameraCapabilities.UpdateCapability.newBuilder().setSupportsOtaUpdate(false))
         .addSupportedVideoModes(
-            buildVideoMode(3840, 2160, 30, 45 * 1024 * 1024, false, FOV_X, FOV_Y))
+            buildVideoMode(4080, 2296, 30, 45 * 1024 * 1024, false, FOV_X, FOV_Y))
         .addSupportedVideoModes(
-            buildVideoMode(3840, 2160, 30, 45 * 1024 * 1024, false, FOV_X, FOV_Y)
+            buildVideoMode(4080, 2296, 30, 45 * 1024 * 1024, false, FOV_X, FOV_Y)
                 .setProjectionType(ProjectionType.EQUIRECT))
         .addSupportedVideoModes(
             buildVideoMode(2560, 1440, 30, 30 * 1024 * 1024, false, FOV_X, FOV_Y))
@@ -57,9 +58,9 @@ public class EmulatorCapabilitiesProvider implements CapabilitiesProvider {
                 .setProjectionType(ProjectionType.EQUIRECT))
         .addSupportedPhotoModes(
             PhotoMode.newBuilder()
-                .setFrameSize(FrameSize.newBuilder().setFrameWidth(4000).setFrameHeight(3000))
+                .setFrameSize(FrameSize.newBuilder().setFrameWidth(8160).setFrameHeight(6144))
                 .setFieldOfView(
-                    FieldOfView.newBuilder().setHorizontalFov(FOV_Y).setVerticalFov(FOV_Y)))
+                    FieldOfView.newBuilder().setHorizontalFov(FOV_X).setVerticalFov(FOV_Y)))
         .addSupportedWhiteBalanceModes(WhiteBalanceMode.AUTO)
         .addSupportedWhiteBalanceModes(WhiteBalanceMode.DAYLIGHT)
         .addSupportedWhiteBalanceModes(WhiteBalanceMode.FLUORESCENT)
@@ -74,6 +75,8 @@ public class EmulatorCapabilitiesProvider implements CapabilitiesProvider {
         .setExposureAdjustmentStep(AE_ADJUSTMENT_STEP)
         .addSupportedViewfinderModes(
             ViewfinderMode.newBuilder()
+
+                    .setStereoMode(StereoMode.STEREO_MODE_STEREO_LONG_SIDE)
                 .setFrameSize(FrameSize.newBuilder().setFrameWidth(640).setFrameHeight(480))
                 .setFramesPerSecond(30f));
 

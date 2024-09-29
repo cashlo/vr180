@@ -15,6 +15,7 @@
 package com.google.vr180.capture.camera;
 
 import android.content.Context;
+import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraConstrainedHighSpeedCaptureSession;
@@ -23,6 +24,7 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
+import android.hardware.camera2.params.OutputConfiguration;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Range;
@@ -31,6 +33,8 @@ import android.view.Surface;
 import com.google.common.base.Preconditions;
 import com.google.vr180.common.logging.Log;
 import com.google.vr180.device.DebugConfig;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -368,7 +372,26 @@ public class CameraPreview {
     cameraDevice = device;
     Log.d(TAG, "Successfully opened camera " + cameraDevice.getId());
 
-    if (cameraOpenRunnable != null) {
+      try {
+        CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics("1");
+        for (CameraCharacteristics.Key<?> key : characteristics.getKeys()) {
+          Object value = characteristics.get(key);
+          Log.d("CameraCharacteristics2", key.getName() + ": " + value);
+        }
+        Log.d("CameraCharacteristics2 getPhysicalCameraIds ", characteristics.getPhysicalCameraIds().toString());
+
+        CameraCharacteristics.Key<Byte> logical_camera_type = new CameraCharacteristics.Key<>("org.codeaurora.qcamera3.logicalCameraType.logical_camera_type", Byte.class);
+
+        Log.d("CameraCharacteristics2 logical_camera_type ", String.valueOf(characteristics.get(logical_camera_type)));
+
+
+
+
+      } catch (CameraAccessException e) {
+          throw new RuntimeException(e);
+      }
+
+      if (cameraOpenRunnable != null) {
       eventHandler.post(cameraOpenRunnable);
       cameraOpenRunnable = null;
     }
@@ -386,6 +409,14 @@ public class CameraPreview {
 
     CameraCaptureSession.StateCallback captureSessionCallback =
         getCaptureSessionStateCallback(previewConfig, activeSurfaces, captureResultCallback);
+
+    ArrayList<OutputConfiguration> configList = new ArrayList<>();
+
+
+    OutputConfiguration outputConfiguration = new OutputConfiguration(sessionSurfaces.get(0));
+    outputConfiguration.setPhysicalCameraId("0");
+
+    configList.add(outputConfiguration);
 
     try {
       cameraConfigurator.preparePreview(previewConfig);

@@ -29,6 +29,10 @@ DEPS = [
     gmaven_artifact("com.android.support:support_annotations:jar:28.0.0"),
     gmaven_artifact("com.android.support:support_fragment:aar:28.0.0"),
     gmaven_artifact("com.android.support:support_v4:aar:28.0.0"),
+    gmaven_artifact("com.android.support:support_compat:aar:28.0.0"),
+    gmaven_artifact("com.android.support:recyclerview-v7:aar:28.0.0"),
+
+
     "//java/com/google/vr180/api",
     "//java/com/google/vr180/capture",
     "//java/com/google/vr180/common",
@@ -38,6 +42,7 @@ DEPS = [
     "//proto:camera_api_java_proto_lite",
     "//proto:camera_internal_api_java_proto_lite",
     "//proto:mesh_java_proto_lite",
+
     "@guava//jar",
     "@httpclient//jar",
     "@httpcore//jar",
@@ -45,6 +50,9 @@ DEPS = [
     "@rxandroid2//aar",
     "@rxjava2//jar",
     "@webrtc//aar",
+    "@glide//aar",
+
+    "@maven//:com_google_android_gms_play_services_ads_lite",
 ]
 
 android_library(
@@ -98,6 +106,7 @@ APP_DEPS = [
     ":camera_native",
     "@glide//aar",
     "@glide_annotations//jar",
+    "@maven//:com_google_android_gms_play_services_ads_lite",
 ]
 
 android_binary(

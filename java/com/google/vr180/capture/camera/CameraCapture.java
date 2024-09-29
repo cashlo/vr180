@@ -16,6 +16,8 @@ package com.google.vr180.capture.camera;
 
 import android.content.Context;
 import android.graphics.SurfaceTexture;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureResult;
 import android.opengl.GLES11Ext;
 import android.opengl.GLSurfaceView;
@@ -37,6 +39,7 @@ import com.google.vr180.media.metadata.ProjectionMetadata;
 import com.google.vr180.media.metadata.ProjectionMetadataProvider;
 import com.google.vr180.media.video.FramerateReporter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /** A class that processes and renders a camera video stream. */
@@ -114,6 +117,25 @@ public class CameraCapture
     PreviewConfig config =
         previewConfigProvider.getPreviewConfigForCaptureMode(
             cameraPreview.getCameraCharacteristics(), captureMode);
+
+
+    Log.e("what", "getPhysicalCameraIds" + cameraPreview.getCameraCharacteristics().getPhysicalCameraIds());
+    CameraCharacteristics characteristics = cameraPreview.getCameraCharacteristics();
+
+    // Iterate through all available keys and log their values
+    for (CameraCharacteristics.Key<?> key : characteristics.getKeys()) {
+      Object value = characteristics.get(key);
+      Log.d("CameraCharacteristics", key.getName() + ": " + value);
+    }
+
+
+
+    int[] capabilities = characteristics.get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES);
+    boolean supportsMultiCamera = Arrays.stream(capabilities)
+            .anyMatch(capability -> capability == CameraMetadata.REQUEST_AVAILABLE_CAPABILITIES_LOGICAL_MULTI_CAMERA);
+    Log.d("CameraCapabilities", "Supports Multi-Camera: " + supportsMultiCamera);
+
+
     ProjectionMetadata newProjectionMetadata = metadataProvider.getProjectionMetadata(captureMode);
     Preconditions.checkNotNull(config);
     Preconditions.checkNotNull(newProjectionMetadata);

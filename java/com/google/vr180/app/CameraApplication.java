@@ -38,7 +38,7 @@ public class CameraApplication extends Application {
   public void onCreate() {
     super.onCreate();
     Log.setTag(LOG_TAG);
-    populateInstanceMap();
+   // populateInstanceMap();
   }
 
   private void populateInstanceMap() {

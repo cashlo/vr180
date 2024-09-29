@@ -71,7 +71,7 @@ and is not supported by this repo.
 
 ## Build
 
-To build the apk: `bazel clean --expunge && bazel build  --noincompatible_enable_android_toolchain_resolution --config=android_arm64 -s java/com/google/vr180/app:camera --spawn_strategy=local --cxxopt="-I$JAVA_HOME/include" --cxxopt="-I$JAVA_HOME/include/linux"`
+To build the apk: `bazel clean --expunge && bazel build --config=android_arm64 -s java/com/google/vr180/app:camera --spawn_strategy=local --cxxopt="-I$JAVA_HOME/include" --cxxopt="-I$JAVA_HOME/include/linux"`
 
 To build and install: `bazel mobile-install java/com/google/vr180/app:camera`
 

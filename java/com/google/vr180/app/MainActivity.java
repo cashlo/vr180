@@ -14,12 +14,14 @@
 
 package com.google.vr180.app;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -35,6 +37,8 @@ import com.google.vr180.common.logging.Log;
 import com.google.vr180.device.DeviceInfo;
 import com.google.vr180.device.Hardware;
 import io.reactivex.disposables.CompositeDisposable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 /** The main activity for the Camera app. */
 public class MainActivity extends AppCompatActivity {
@@ -110,6 +114,15 @@ public class MainActivity extends AppCompatActivity {
   public void onResume() {
     super.onResume();
     hideStatusBar(this);
+    final int REQUEST_READ_STORAGE = 100;
+
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
+            != PackageManager.PERMISSION_GRANTED) {
+      // Permission is not granted, request it
+      ActivityCompat.requestPermissions(this,
+              new String[]{Manifest.permission.READ_MEDIA_IMAGES},
+              REQUEST_READ_STORAGE);
+    }
   }
 
   public void onSettingsButtonClick(View view) {

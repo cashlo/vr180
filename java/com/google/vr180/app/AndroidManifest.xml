@@ -27,13 +27,13 @@
       android:minSdkVersion="23"
       android:targetSdkVersion="33"/>
 
+
+  <!--
+
   <uses-permission android:name="android.permission.REBOOT"/>
   <uses-permission android:name="android.permission.CAMERA"/>
   <uses-permission android:name="android.permission.RECORD_AUDIO" />
-  <uses-permission android:name="android.permission.INTERNET"/>
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.BLUETOOTH" />
   <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -42,13 +42,21 @@
   <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
   <uses-permission android:name="android.permission.OVERRIDE_WIFI_CONFIG" />
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-  <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE"/>
   <uses-permission android:name="android.permission.SET_TIME"/>
   <uses-permission android:name="android.permission.SET_TIME_ZONE"/>
   <uses-permission android:name="android.permission.CONNECTIVITY_INTERNAL"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
   <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
   <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE"/>
+
+
+  -->
+
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE"/>
 
 
   <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
@@ -62,6 +70,25 @@
       android:largeHeap="true"
       android:supportsRtl="true">
 
+    <meta-data
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-2900743397888996~1471623758"/>
+
+
+    <activity
+        android:name="com.google.vr180.app.ImageSelectionActivity"
+        android:exported="true"
+        android:theme="@style/app_theme_main"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:launchMode="singleTask"> <!-- `exported` must be set to true for API level 31+ -->
+
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+    </activity>
+
     <!-- Main UI activity -->
     <activity
         android:name="com.google.vr180.app.MainActivity"
@@ -70,11 +97,6 @@
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:screenOrientation="landscape"
         android:launchMode="singleTask">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-        <category android:name="android.intent.category.LAUNCHER"/>
-        <category android:name="android.intent.category.DEFAULT"/>
-      </intent-filter>
     </activity>
 
     <!-- Settings UI activity -->

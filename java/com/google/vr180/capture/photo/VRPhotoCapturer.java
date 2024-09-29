@@ -14,7 +14,11 @@
 
 package com.google.vr180.capture.photo;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraCharacteristics;
@@ -39,6 +43,8 @@ import com.google.vr180.media.metadata.StereoReprojectionConfig;
 import com.google.vr180.media.motion.MotionEvent;
 import com.google.vr180.media.photo.ExifWriter;
 import com.google.vr180.media.photo.PhotoWriter;
+
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -167,16 +173,38 @@ public class VRPhotoCapturer
     long timestamp = image.getTimestamp();
 
     Image.Plane plane = image.getPlanes()[0];
-    int stride = plane.getRowStride();
-    byte[] data = new byte[stride * height];
-    plane.getBuffer().get(data);
+
+    Bitmap bitmap = BitmapFactory.decodeFile("/storage/emulated/0/DCIM/Camera/SV_20240906_200624.jpg");  // Replace 'path' with the actual file path if different
+    if (bitmap == null) {
+      Log.e(TAG, "Failed to decode image file.");
+      return;
+    }
+
+    width = bitmap.getWidth();
+    height = bitmap.getHeight();
+    int bytesPerPixel = 4; // for ARGB_8888
+    int stride = bitmap.getWidth() * bytesPerPixel;
+
+
+    // Convert the scaled bitmap to a byte array
+    ByteBuffer bitmapBuffer = ByteBuffer.allocate(bitmap.getByteCount());
+    bitmap.copyPixelsToBuffer(bitmapBuffer);
+    byte[] data = bitmapBuffer.array();
+
+    // Close the Bitmap to free resources
+    bitmap.recycle();
+
+
+    //int stride = plane.getRowStride();
+    //byte[] data = new byte[stride * height];
+    //plane.getBuffer().get(data);
     image.close();
     SizeF fov =
         stereoReprojectionConfig == null ? new SizeF(0, 0) : stereoReprojectionConfig.getFov();
-    int stereoMode =
-        stereoReprojectionConfig == null
-            ? StereoMode.MONO
-            : stereoReprojectionConfig.getStereoMode();
+    int stereoMode = StereoMode.LEFT_RIGHT;
+    //    stereoReprojectionConfig == null
+    //        ? StereoMode.MONO
+    //        : stereoReprojectionConfig.getStereoMode();
     if (PhotoWriter.nativeWriteVRPhotoToFile(
         data,
         width,

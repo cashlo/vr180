@@ -269,3 +269,41 @@ maven_jar(
     artifact = "org.reactivestreams:reactive-streams:1.0.2",
     sha1 = "323964c36556eb0e6209f65c1cef72b53b461ab8",
 )
+
+RULES_JVM_EXTERNAL_TAG = "6.3"
+RULES_JVM_EXTERNAL_SHA = "c18a69d784bcd851be95897ca0eca0b57dc86bb02e62402f15736df44160eb02"
+
+http_archive(
+    name = "rules_jvm_external",
+    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
+    sha256 = RULES_JVM_EXTERNAL_SHA,
+    url = "https://github.com/bazelbuild/rules_jvm_external/releases/download/%s/rules_jvm_external-%s.tar.gz" % (RULES_JVM_EXTERNAL_TAG, RULES_JVM_EXTERNAL_TAG)
+)
+
+load("@rules_jvm_external//:repositories.bzl", "rules_jvm_external_deps")
+
+rules_jvm_external_deps()
+
+load("@rules_jvm_external//:setup.bzl", "rules_jvm_external_setup")
+
+rules_jvm_external_setup()
+
+load("@rules_jvm_external//:defs.bzl", "maven_install")
+
+maven_aar(
+    name = "androidx_work_runtime",
+    artifact = "androidx.work:work-runtime:2.7.0",
+)
+
+maven_install(
+    name = "maven",
+    artifacts = [
+        "com.google.android.gms:play-services-ads-lite:23.3.0",  # Add any other dependencies here
+
+    ],
+    excluded_artifacts = ["androidx.work:work-runtime"],
+    repositories = [
+        "https://maven.google.com",  # Google Maven repository
+        "https://repo1.maven.org/maven2",  # Maven Central
+    ],
+)
